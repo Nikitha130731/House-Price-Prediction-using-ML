@@ -1,156 +1,88 @@
+# House Price Prediction Using Machine Learning
 
-**House Price Prediction using Machine Learning**
+## Project Overview
 
-**Overview**
+This project aims to predict house prices in Ames, Iowa, based on various features using machine learning models. The dataset contains information about homes in Ames, including various attributes like square footage, neighborhood, quality of construction, and more. The goal is to predict the sale price of these homes using the data provided.
 
-This House Price Prediction project leverages machine learning algorithms to predict the sale prices of houses based on various features, such as the size of the house, the number of rooms, and the location. The goal is to provide a predictive model that can help real estate professionals and homebuyers make informed decisions based on historical data.
+## Data Source
 
-The project involves a series of steps, including data cleaning, feature engineering, exploratory data analysis (EDA), model training, and evaluation. It demonstrates how machine learning can be applied to a real-world problem and how to choose the right algorithms to make predictions based on available data.
+The dataset used for this project is from the [Kaggle House Price Prediction competition](https://www.kaggle.com/c/house-prices-advanced-regression-techniques).
 
-**Features**
+- **train.csv**: The training data consisting of 1460 rows and 81 features, including the target variable `SalePrice`.
+- **test.csv**: The test data consisting of 1459 rows, where the predictions for `SalePrice` need to be made.
+- **sample_submission.csv**: A sample submission file showing the format for the final predictions.
 
-	•	Data Preprocessing:
-	•	Handling Missing Data: Identifying and filling in or dropping rows with missing values.
-	•	Feature Encoding: Converting categorical data into numerical representations using techniques like one-hot encoding.
-	•	Feature Scaling: Standardizing or normalizing features to bring them to a common scale, which is important for certain models.
-	•	Exploratory Data Analysis (EDA):
-	•	Visualizing the data to understand trends, distributions, and relationships between different features (e.g., using scatter plots and correlation heatmaps).
-	•	Identifying important features that most significantly impact the house prices.
-	•	Model Building:
-	•	Implementing several regression models such as:
-	•	Linear Regression: A simple approach that assumes a linear relationship between the input features and the target variable (house price).
-	•	Decision Tree Regressor: A non-linear model that splits the data into subsets based on feature values.
-	•	Random Forest Regressor: An ensemble method that combines multiple decision trees to improve accuracy and robustness.
-	•	Gradient Boosting Regressor: An advanced ensemble technique that builds multiple weak models to create a stronger overall prediction.
-	•	Model Evaluation:
-	•	Comparing models based on evaluation metrics such as Root Mean Squared Error (RMSE) and R-squared (R²) to assess the quality of predictions.
-	•	Fine-tuning models to improve their performance.
-	•	Model Deployment (Optional):
-	•	If desired, the model can be deployed using Flask or any other deployment framework to make real-time predictions via a web interface.
+## Project Steps
 
-**Dataset**
+### 1. **Data Preprocessing**
 
-The dataset used in this project contains various features related to house sales. Each record represents a house with its corresponding features and sale price. Some of the key features in the dataset include:
-	•	Location: The area or neighborhood of the house.
-	•	Square Footage: The size of the house in square feet.
-	•	Number of Bedrooms and Bathrooms: The count of rooms and bathrooms.
-	•	Year Built: The year the house was constructed.
-	•	Lot Size: The area of the land on which the house is built.
-	•	Other Features: Such as the garage size, proximity to schools, etc.
+   - **Missing Values Handling**: 
+     - Numerical features with missing values were imputed with the median value.
+     - Categorical features with missing values were imputed with the mode (most frequent value).
+   - **One-Hot Encoding**: 
+     - Categorical features were encoded using One-Hot Encoding to convert them into numerical format.
+   - **Feature Scaling**: 
+     - Numerical features were scaled using **StandardScaler** to standardize their values and bring them to a common scale.
+   - **Dimensionality Reduction**: 
+     - **PCA** (Principal Component Analysis) was used to reduce the dimensionality of the dataset while retaining the majority of variance.
 
-The dataset is used to train machine learning models that can predict the price of a house based on these features.
+### 2. **Model Development**
 
-**Technology Stack**
+   - **Linear Regression**: Used as the baseline model to predict house prices.
+   - **Random Forest Regressor**: An ensemble learning method used to improve model accuracy.
+   - **XGBoost**: A gradient boosting algorithm used for better performance on large datasets.
+   - **Hyperparameter Tuning**: Performed using **GridSearchCV** to find the best model parameters.
 
-This project is implemented in Python using popular libraries and tools in data science and machine learning:
-	•	Programming Language: Python 3.x
-	•	Libraries:
-	•	Pandas: Used for data manipulation and analysis (e.g., loading the dataset, cleaning, and transforming data).
-	•	NumPy: For numerical operations and handling arrays.
-	•	Matplotlib & Seaborn: For creating visualizations and plots to help in the EDA phase.
-	•	Scikit-learn: For implementing machine learning algorithms (regression models, preprocessing tools, and evaluation metrics).
-	•	Jupyter Notebook: For interactive exploration of the dataset and model development.
-	•	Tools for Deployment (Optional):
-	•	Flask: If you wish to deploy the model as a web application for real-time predictions.
-	•	Heroku or AWS (Optional): For hosting the model in a cloud environment.
+### 3. **Model Evaluation**
 
-**Project Structure**
+   - Models were evaluated using **Mean Squared Error (MSE)**, **Root Mean Squared Error (RMSE)**, and **R²** score.
+   - The best model was selected based on performance on the test set.
 
-The project is organized as follows:
+### 4. **Final Model**
 
-House-Price-Prediction/
-│
-├── static/                      # Contains static files (e.g., CSS, images, etc.) for deployment (if applicable)  
-├── templates/                   # HTML templates for the web interface (if applicable)  
-├── data/                        # Folder containing dataset files  
-│   └── house_prices.csv         # Dataset containing house features and sale prices  
-├── notebooks/                   # Jupyter Notebooks for data analysis and model training  
-│   └── eda_modeling.ipynb       # Contains the steps for EDA, data preprocessing, and model training  
-├── app.py                       # Flask application for deploying the model (optional)  
-├── requirements.txt             # List of Python dependencies for the project  
-├── README.md                    # Project description and documentation  
-└── LICENSE                      # Project license (if applicable)  
+   - The best performing model (e.g., XGBoost) was used to predict the target variable `SalePrice` on the test dataset.
 
-**Installation and Setup**
+## Files in this Repository
 
-**Prerequisites**
+- **house_price_prediction.ipynb**: The Jupyter Notebook containing all the steps from data preprocessing to model training and evaluation.
+- **train.csv**: The training data for model building.
+- **test.csv**: The test data on which the model makes predictions.
+- **sample_submission.csv**: Sample output submission file for the Kaggle competition format.
+- **submission.csv**: The final output with predicted house prices for the test dataset.
 
-Ensure you have the following installed:
-	•	Python 3.x
-	•	Pip (Python’s package installer)
-	•	Virtualenv (recommended)
+## Instructions to Run the Code
 
-Steps to Setup the Project
+1. **Clone the repository** to your local machine:
+   ```bash
+   git clone https://github.com/Nikitha130731/House-Price-Prediction-using-ML.git
 
-	**1.	Clone the repository**
-Clone the project to your local machine by running the following command in your terminal:
+2.	Install the required dependencies:
 
-git clone https://github.com/Nikitha130731/house-price-prediction.git  
-cd house-price-prediction  
+pip install -r requirements.txt
 
 
-	**2.	Set up a virtual environment**
-It’s a good practice to create a virtual environment to isolate the dependencies:
+3.	Run the Jupyter notebook:
+Open the Jupyter notebook house_price_prediction.ipynb in your local environment and run the cells sequentially.
+4.	Model Training:
+	•	The notebook will guide you through the preprocessing, model development, and evaluation steps.
+	•	Once the best model is selected, it will generate predictions on the test dataset.
+5.	Final Submission:
+	•	A file submission.csv will be generated with the predicted sale prices.
+	•	The file will have the format: Id and SalePrice.
 
-python -m venv venv  
-source venv/bin/activate  # On Windows: venv\Scripts\activate  
+Evaluation Metrics
+
+	•	Mean Squared Error (MSE): Measures the average squared difference between the predicted and actual values.
+	•	R² Score: The proportion of variance in the dependent variable (sale price) that is explained by the independent variables (features).
+
+Future Work and Improvements
+
+	•	Deep Learning Models: Exploring deep learning models like neural networks to improve prediction accuracy.
+	•	Feature Engineering: Investigating additional feature creation or transformation methods to boost model performance.
+	•	Advanced Algorithms: Experimenting with more advanced algorithms such as LightGBM or CatBoost for potential performance improvements.
+
+License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
 
 
-	**3.	Install required dependencies**
-Install the required Python libraries by running:
-
-pip install -r requirements.txt  
-
-
-	**4.	Run the Jupyter Notebook**
-If you want to interact with the notebook for data exploration and model training:
-
-jupyter notebook  
-
-
-	**5.	Deploy the model (optional)**
-If you wish to deploy the model as a web application, run the Flask app:
-
-python app.py  
-
-**Usage**
-
-	**1.	Explore the data:**
-Use the Jupyter notebook to inspect the data, perform exploratory data analysis, and visualize relationships between features and the target variable (house price).
-	**2.	Preprocess the data:**
-Clean and transform the data, including handling missing values, encoding categorical variables, and scaling numerical features.
-	**3.	Train the model:**
-Implement various machine learning models (e.g., Linear Regression, Decision Trees) to train on the dataset. Evaluate the models using metrics such as RMSE and R².
-	**4.	Make Predictions:**
-Use the trained models to predict house prices on new data or for validation.
-	**5.	Deploy the model (optional):**
-Deploy the model using Flask to create an interactive web application where users can input house features and get price predictions in real time.
-
-**Results**
-
-	•	Exploratory Data Analysis (EDA):
-	•	Visualized correlations and patterns in the dataset to understand the relationship between house features and price.
-	•	Discovered key factors such as square footage, location, and number of rooms that significantly impact the price.
-	•	Model Performance:
-	•	Compared different machine learning models (Linear Regression, Decision Tree, Random Forest, Gradient Boosting).
-	•	Chose the best model based on performance metrics like RMSE and R².
-
-**Future Enhancements**
-
-	•	Additional Features:
-	•	Include more features such as proximity to public transport, neighborhood crime rates, etc., to improve the accuracy of predictions.
-	•	Advanced Models:
-	•	Explore advanced machine learning models like XGBoost, LightGBM, or Deep Learning for potentially higher performance.
-	•	Real-Time Web Application:
-	•	Extend the Flask app to accept real-time input from users and predict house prices on the go.
-
-**License**
-
-This project is licensed under the MIT License. See the LICENSE file for more details.
-
-**Acknowledgements**
-
-	•	Dataset: Kaggle House Prices Dataset
-	•	Libraries: Scikit-learn, Pandas, Matplotlib, Seaborn
-
-Replace "https://github.com/Nikitha130731/house-price-prediction.git" with your actual GitHub repository URL. Let me know if you need further adjustments!
